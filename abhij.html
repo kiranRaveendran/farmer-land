@@ -1,0 +1,150 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+        body {
+            /* background-color: antiquewhite; */
+            max-width: 100vw;
+        }
+        .sidebar,.collapse .ab {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      align-items: start;
+      background-color: rgb(138, 212, 138);
+    }
+    .top_bar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 250px;
+      height: 70px;
+    }
+    .content{
+      margin-left: 250px;
+      margin-top: 70px;
+      background-color: rgb(249, 245, 239);
+    }
+    @media (max-width: 767px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+      .top_bar {
+        position: relative;
+        left: 0;
+      }
+       .content{
+      margin-left: 0;
+      margin-top: 0;
+    }
+    }
+      
+        </style>
+    </head>
+    <body>
+        <!--------------------side bar-------------------- -->
+    <nav
+      class="sidebar navbar navbar-expand-md  justify-content-start"
+    >
+      <div
+        class="ab container-fluid align-items-start flex-md-column"
+      >
+        <h2 class="bg-primary-subtle my-md-3 mb-md-5">KRISHIBHAVAN</h2>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse w-100 flex-md-column justify-content-start gap-md-3" id="navbarTogglerDemo02">
+          <button class="btn text-start bg-primary w-100">Dasboard</button>
+           <button class="btn text-start bg-primary w-100">Products</button>
+            <button class="btn text-start bg-primary w-100">Orders</button>
+             <button class="btn text-start bg-primary w-100">Payment Analytics</button>
+              <button class="btn text-start bg-primary w-100">Insights</button>
+               <button class="btn text-start bg-primary w-100">My profile</button>
+        
+        </div>
+      </div>
+    </nav>
+    <!---------------------------------Top bar-------------------------------- -->
+    <div class="top_bar bg-primary-subtle d-flex justify-content-between p-3">
+      <h4>Dashboard/<p id="currentpagename"></p></h4>
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-danger" type="">Search</button>
+      </form>
+    </div>
+        <div class="content p-5 " >
+        <div class="row m-0 ">
+            <h1 class="display-5 text-success">My profile</h1>
+        </div>
+        <div class="row m-0 px-5 py-3   border rounded-4" style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+            <div
+            class="col-1 border   rounded-circle" style="width: 100px; height: 100px; background-image: url(ChatGPT\ Image\ Oct\ 22\,\ 2025\,\ 03_15_36\ PM.png);background-size: cover;background-position: center 70%;"></div>
+            
+            <div class="col-2 d-flex align-items-center">
+            Demo name <br />
+            Admin <br />
+            Demo@gmail.com
+            </div>
+        </div>
+        <div class="row m-0 p-3 mt-4 rounded-4"style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+            <div class="row ms-0 border-bottom border-white border-5 ">
+                <div class="col-sm-11 col-4">
+                <h1 class="display-5 text-success">personal information</h1>
+            </div>
+            <div class="col-sm-auto col-8  d-flex justify-content-end align-items-center"><button class="btn btn-outline-success">Edit <i class="fa-solid fa-pen"></i> </button></div>
+            </div>
+            
+            <div class=" col-sm-4 col-12 d-flex flex-column justify-content-center align-items-center text-center mt-3 border-bottom border-md-0 pb-3">first name<br><b>demo name</b><br><br>email Address<br><b>demo@gmail.com</b></div>
+            <div class=" col-sm-4 col-12 d-flex flex-column justify-content-center align-items-center text-center mt-3 border-bottom border-md-0 pb-3">Last name<br><b>demo name</b><br><br>Phoone Number<br><b>(+91)7306744127</b></div>
+            <div class=" col-sm-4 col-12 d-flex flex-column justify-content-center align-items-center text-center mt-3 border-bottom border-md-0 pb-3">Date of Birth<br><b>31/12/2002</b><br><br>User Role<br><b>Admin</b></div>
+        </div>
+
+         <div class="row m-0 p-3 mt-4 rounded-4"style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+            <div class="row ms-0 border-bottom border-white border-5 ">
+                <div class="col-sm-11 col-4">
+                <h1 class="display-5 text-success">personal information</h1>
+            </div>
+            <div class="col-sm-auto col-8  d-flex justify-content-end align-items-center"><button class="btn btn-outline-success">Edit <i class="fa-solid fa-pen"></i> </button></div>
+            </div>
+            
+            <div class=" col-sm-4 col-12 d-flex flex-column justify-content-center align-items-center text-center mt-3 border-bottom border-md-0 pb-3">first name<br><b>demo name</b><br><br>email Address<br><b>demo@gmail.com</b></div>
+            <div class=" col-sm-4 col-12 d-flex flex-column justify-content-center align-items-center text-center mt-3 border-bottom border-md-0 pb-3">Last name<br><b>demo name</b><br><br>Phoone Number<br><b>(+91)7306744127</b></div>
+            <div class=" col-sm-4 col-12 d-flex flex-column justify-content-center align-items-center text-center mt-3 border-bottom border-md-0 pb-3">Date of Birth<br><b>31/12/2002</b><br><br>User Role<br><b>Admin</b></div>
+        </div>
+
+        </div>
+
+        <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"
+        ></script>
+    </body>
+    </html>
