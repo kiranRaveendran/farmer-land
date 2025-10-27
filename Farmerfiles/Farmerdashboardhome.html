@@ -67,12 +67,12 @@
             <form class="row m-0 g-3 bg-white mt-4 rounded-4 p-4 fw-bold">
                 <h3><i class="fa-solid fa-square-plus text-warning"></i>ADD PRODUCTS</h3>
                 <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label">Product Name</label>
+                    <label for="Productname" class="form-label">Product Name</label>
                     <input type="text" class="form-control" placeholder="name" id="Productname">
                 </div>
                 <div class="col-md-6">
                     <label for="inputState" class="form-label">Category</label>
-                    <select id="inputState" class="form-select">
+                    <select id="Category" class="form-select">
                         <option selected>Choose...</option>
                         <option>Rice</option>
                         <option>Carrot</option>
@@ -81,19 +81,20 @@
                     </select>
                 </div>
                 <div class="col-12">
-                    <label for="inputAddress" class="form-label">Description</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Details about product">
+                    <label for="inputdescription" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="inputdescription" placeholder="Details about product">
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="" class="form-label">Price Per unit</label>
-                    <input type="number" class="form-control" placeholder="Price" aria-label="First name">
+                    <label for="price" class="form-label">Price Per unit</label>
+                    <input type="number" class="form-control" id="price" placeholder="Price" aria-label="First name">
                 </div>
                 <div class="col-sm-6">
-                    <label for="" class="form-label">Quantity in Stock (kg)</label>
-                    <input type="number" class="form-control" placeholder="Quantity Available" aria-label="Last name">
+                    <label for="quantityinstock" class="form-label">Quantity in Stock (kg)</label>
+                    <input type="number" class="form-control" id="quantityinstock" placeholder="Quantity Available"
+                        aria-label="Last name">
                 </div>
-                <div class="col">
+                <div class="col-12">
                     <label for="" class="form-label">Product Image</label>
                     <div class="image-upload-box p-5 d-flex flex-column rounded-4 align-items-center justify-content-center"
                         onclick="document.getElementById('imageInput').click()">
@@ -104,16 +105,8 @@
                             onchange="previewImage(event)">
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                            Check me out
-                        </label>
-                    </div>
-                </div>
                 <div class="col gap-4 d-flex flex-column flex-sm-row">
-                    <button type="submit" class="btn w-100 btn-success">Add product</button>
+                    <button type="submit" class="btn w-100 btn-success" id="btnaddproduct">Add product</button>
                     <button type="submit" class="btn w-100 btn-warning">Clear Form</button>
                 </div>
             </form>
@@ -124,6 +117,61 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="Script/loadnavbar.js"></script>
+    <script>
+        // -----------image in form
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const preview = document.getElementById('preview');
+                preview.src = reader.result;
+                preview.style.display = 'block';
+                document.getElementById('uploadText').style.display = 'none';
+                document.getElementById('uploadicon').style.display = 'none';
+
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        // -------------------fetch name and details and showing-------------------
+        let farmerdetails = [{
+            name: "krishGOD",
+            pcount: 26,
+            outcount: 4,
+            orderactive: 12,
+            total: 2000
+        }]
+        farmerdetails.forEach((item) => {
+            document.querySelectorAll(".namefarmer").forEach((div) => div.textContent = item.name)
+            document.getElementById("productcount").textContent = item.pcount
+            document.getElementById("outofstockcount").textContent = item.outcount
+            document.getElementById("activeordercount").textContent = item.orderactive
+            document.getElementById("totalrevenue").textContent = item.total
+
+        })
+        //--------------Active Current page and Show the current page near dashboard title
+        const currentPage = document.body.getAttribute('data-page');
+        if (currentPage) {
+            const sidebarButtons = document.querySelectorAll('#sidebarMenu button');
+            sidebarButtons.forEach((btn) => {
+                if (btn.textContent === currentPage) {
+                    btn.classList.add('bg-success');
+                    document.getElementById('currentpagename').textContent = btn.textContent;
+                }
+            });
+        }
+        let buttonaddproduct=document.getElementById("btnaddproduct")
+        let pname=document.getElementById("Productname")
+        let category=document.getElementById("Category")
+        let description=document.getElementById("inputdescription")
+        let priceperunit=document.getElementById("price")
+        let quantity=document.getElementById("quantityinstock")
+        let image=document.getElementById("imageInput")
+        function addproduct(event){
+            
+            // if(!pname) console.log(pname);
+            console.log(pname);
+        }
+        buttonaddproduct.addEventListener("click",addproduct)
+    </script>
 </body>
 
 </html>
