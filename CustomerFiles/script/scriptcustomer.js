@@ -11,20 +11,17 @@ async function loadLayout() {
   await loadHTML('topbarcustomer.html', 'topbar-placeholder');
 
 //----------------- Highlight active page
-  const currentPage = document.body.getAttribute('data-page');
-  if (currentPage) {
-    const sidebarButtons = document.querySelectorAll('#sidebarMenu button');
-    sidebarButtons.forEach((btn) => {
-      if (btn.dataset.page === currentPage) {
-        btn.classList.add('bg-success');
-        btn.classList.remove('bg-primary');
-
-        const pageNameSpan = document.getElementById('currentpagename');
-        if (pageNameSpan) pageNameSpan.textContent = btn.textContent;
-      }
-    });
-  }
-}
+const currentPage = document.body.getAttribute('data-page');
+        if (currentPage) {
+            const sidebarButtons = document.querySelectorAll('#sidebarMenu button');
+            sidebarButtons.forEach((btn) => {
+                if (btn.textContent === currentPage) {
+                    btn.classList.add('bg-success');
+                    document.getElementById('currentpagename').textContent = btn.textContent;
+                }
+            });
+        }
 
 //-------------------- Load everything
 window.addEventListener('DOMContentLoaded', loadLayout);
+
