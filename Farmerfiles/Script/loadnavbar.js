@@ -12,25 +12,22 @@ async function loadLayout() {
   await loadHTML("topbar.html", "topbar-placeholder");
 
   // Highlight active page
-  const currentPage = document.body.getAttribute("data-page");
+  const currentPage = document.body.getAttribute('data-page');
   if (currentPage) {
-    const sidebarButtons = document.querySelectorAll(
-      "#sidebarMenu [data-page]"
-    );
+    const sidebarButtons = document.querySelectorAll('#sidebarMenu [data-page]');
     sidebarButtons.forEach((btn) => {
-      if (btn.getAttribute("data-page") === currentPage) {
-        btn.classList.add("bg-white", "text-dark");
-        btn.classList.remove("text-white");
+      if (btn.getAttribute('data-page') === currentPage) {
+        btn.classList.add('bg-white', 'text-dark');
+        btn.classList.remove('text-white');
       } else {
-        btn.classList.remove("bg-success", "text-light");
-        btn.classList.add("text-white");
+        btn.classList.remove('bg-success', 'text-light');
+        btn.classList.add('text-white');
       }
     });
     // Optional: update topbar
-    const pageNameSpan = document.getElementById("currentpagename");
+    const pageNameSpan = document.getElementById('currentpagename');
     if (pageNameSpan) {
-      const prettyName =
-        currentPage.charAt(0).toUpperCase() + currentPage.substr(1);
+      const prettyName = currentPage.charAt(0).toUpperCase() + currentPage.substr(1);
       pageNameSpan.textContent = prettyName;
     }
   }

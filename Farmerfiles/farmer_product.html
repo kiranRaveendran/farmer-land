@@ -1,58 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <link href="Style/navbar.css" rel="stylesheet">
-
+  <style>
+    body {
+      background: #f7f8f9;
+    }
+    .dashboard-title {
+      color: #2e6325;
+      font-weight: 700;
+      margin-bottom: .2em;
+    }
+    .product-table th {
+      background: #346b1f;
+      color: #fff !important;
+      font-weight: 600;
+      border: none;
+    }
+    .product-table td {
+      background: #fff;
+      vertical-align: middle;
+    }
+    .badge-available {
+      background: #eafbe7;
+      color: #377d32;
+      font-weight: 600;
+      border-radius: .35rem;
+    }
+    .badge-outstock {
+      background: #ffe4e4;
+      color: #a02929;
+      font-weight: 600;
+      border-radius: .35rem;
+    }
+    .filter-btn {
+      background: #fff;
+      color: #346b1f;
+      border: 1px solid #b7eec0;
+      border-radius: .5rem;
+      margin-right: 0.5em;
+      font-weight: 500;
+    }
+    .filter-btn.active {
+      background: #346b1f;
+      color: #fff;
+      border-color: #346b1f;
+    }
+    .table-actions .btn {
+      background: #f9fbe7;
+      color: #2e6325;
+      margin-right: .35em;
+      border-radius: .3em;
+      padding: .2em .5em;
+    }
+    .table-actions .btn:last-child {
+      margin-right: 0;
+    }
+    .statbox {
+      box-shadow: 0 2px 8px rgba(60, 120, 40,0.09);
+      border: none;
+    }
+    .stat-title {
+      font-size: 1.1em;
+      color: #2e6325;
+      font-weight: 600;
+    }
+    .stat-number {
+      font-size: 2em;
+      font-weight: 700;
+      color: #2e6325;
+    }
+    .stat-icon {
+      min-width: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 900px) {
+      .product-table th, .product-table td {
+        font-size: .96em;
+      }
+    }
+  </style>
 </head>
-<body>
-    <div id="sidebar-placeholder"></div>
+<body data-page = "products">
+  <div id="sidebar-placeholder"></div>
   <div class="main-content">
     <div id="topbar-placeholder"></div>
     <div class="content-body p-4">
-        <div class="row m-0 fw-bold mt-3 gap-3">
-                <div class="col-12 col-sm bg-white rounded-4 p-4">
-                    <div class="align d-flex justify-content-between">
-                        <h4 class="fw-bold">Total products</h4>
-                        <i class="fa-solid fa-box fs-2 me-2 text-primary"></i>
-                    </div>
-                    <div id="productcount" class="fs-2">20</div>
-                    <div id="todaycount" class="text-success">+2 this week</div>
-                </div>
-                <div class="col-12 col-sm bg-white rounded-4 p-4">
-                    <div class="align d-flex justify-content-between">
-                        <h4 class="fw-bold">Available</h4>
-                        <i class="fa-solid fa-arrow-trend-up fs-2 text-success"></i>
-                    </div>
-                    <div id="outofstockcount" class="fs-2">18</div>
-                    <div id="todaycount" class="text-success">+2 this week</div>
-                </div>
-                <div class="col-12 col-md bg-white rounded-4 p-4">
-                    <div class="align d-flex justify-content-between">
-                        <h4 class="fw-bold">Low Stock</h4>
-                        <i class="fa-solid fa-boxes-stacked fs-2 text-warning"></i>
-                    </div>
-                    <div id="activeordercount" class="fs-2">2</div>
-                    <div id="todaycount" class="text-success">+2 this week</div>
-                </div>
-                <div class="col-12 col-sm bg-white rounded-4 p-4">
-                    <div class="align d-flex justify-content-between">
-                        <h4 class="fw-bold">Out of stock</h4>
-                        <i class="fa-solid fa-arrow-trend-down fs-2 text-danger"></i>
-                    </div>
-                    <div id="totalrevenue" class="fs-2">4</div>
-                    <div id="todaycount" class="text-success">+2 this week</div>
-                </div>
 
             </div>
     </div>
   </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="Script/loadnavbar.js"></script>
   <script src="Script/addproduct.js"></script>
   
