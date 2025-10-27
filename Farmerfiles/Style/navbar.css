@@ -1,0 +1,56 @@
+:root {
+        --sidebar-width: 13rem;
+        --topbar-height: 5rem;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .sidebar {
+        height: 100vh;
+        width: var(--sidebar-width);
+        position: fixed;
+        background-color: rgb(29, 97, 29);
+    }
+
+    .welcome {
+        background-color: rgb(29, 97, 29);
+
+    }
+
+    .topbar {
+        height: var(--topbar-height);
+        background-color: rgb(248, 249, 250);
+    }
+
+    .main-content {
+        background-color: rgb(249, 245, 239);
+        margin-left: var(--sidebar-width);
+    }
+
+    .btndashboard:hover {
+
+        background-color: white !important;
+        font-size: larger;
+        color: black !important;
+    }
+
+
+      /*-------------- Responsive */
+      @media (max-width: 768px) {
+        .layout {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          flex: 0 0 auto;
+          height: auto;
+        }
+
+        .topbar {
+          position: relative;
+        }
+      }
