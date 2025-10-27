@@ -1,60 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <link href="Style/navbar.css" rel="stylesheet">
-
+  <style>
+    body {
+      background: #f7f8f9;
+    }
+    .dashboard-title {
+      color: #2e6325;
+      font-weight: 700;
+      margin-bottom: .2em;
+    }
+    .product-table th {
+      background: #346b1f;
+      color: #fff !important;
+      font-weight: 600;
+      border: none;
+    }
+    .product-table td {
+      background: #fff;
+      vertical-align: middle;
+    }
+    .badge-available {
+      background: #eafbe7;
+      color: #377d32;
+      font-weight: 600;
+      border-radius: .35rem;
+    }
+    .badge-outstock {
+      background: #ffe4e4;
+      color: #a02929;
+      font-weight: 600;
+      border-radius: .35rem;
+    }
+    .filter-btn {
+      background: #fff;
+      color: #346b1f;
+      border: 1px solid #b7eec0;
+      border-radius: .5rem;
+      margin-right: 0.5em;
+      font-weight: 500;
+    }
+    .filter-btn.active {
+      background: #346b1f;
+      color: #fff;
+      border-color: #346b1f;
+    }
+    .table-actions .btn {
+      background: #f9fbe7;
+      color: #2e6325;
+      margin-right: .35em;
+      border-radius: .3em;
+      padding: .2em .5em;
+    }
+    .table-actions .btn:last-child {
+      margin-right: 0;
+    }
+    .statbox {
+      box-shadow: 0 2px 8px rgba(60, 120, 40,0.09);
+      border: none;
+    }
+    .stat-title {
+      font-size: 1.1em;
+      color: #2e6325;
+      font-weight: 600;
+    }
+    .stat-number {
+      font-size: 2em;
+      font-weight: 700;
+      color: #2e6325;
+    }
+    .stat-icon {
+      min-width: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 900px) {
+      .product-table th, .product-table td {
+        font-size: .96em;
+      }
+    }
+  </style>
 </head>
-<body>
-    <div id="sidebar-placeholder"></div>
+<body data-page = "products">
+  <div id="sidebar-placeholder"></div>
   <div class="main-content">
     <div id="topbar-placeholder"></div>
     <div class="content-body p-4">
-        <div class="row m-0 fw-bold mt-3 gap-3">
-                <div class="col-12 col-sm bg-white rounded-4 p-4">
-                    <div class="align d-flex justify-content-between">
-                        <h4 class="fw-bold">Total products</h4>
-                        <i class="fa-solid fa-box fs-2 me-2 text-primary"></i>
-                    </div>
-                    <div id="productcount" class="fs-2">20</div>
-                    <div id="todaycount" class="text-success">+2 this week</div>
-                </div>
-                <div class="col-12 col-sm bg-white rounded-4 p-4">
-                    <div class="align d-flex justify-content-between">
-                        <h4 class="fw-bold">Available</h4>
-                        <i class="fa-solid fa-arrow-trend-up fs-2 text-success"></i>
-                    </div>
-                    <div id="outofstockcount" class="fs-2">18</div>
-                    <div id="todaycount" class="text-success">+2 this week</div>
-                </div>
-                <div class="col-12 col-md bg-white rounded-4 p-4">
-                    <div class="align d-flex justify-content-between">
-                        <h4 class="fw-bold">Low Stock</h4>
-                        <i class="fa-solid fa-boxes-stacked fs-2 text-warning"></i>
-                    </div>
-                    <div id="activeordercount" class="fs-2">2</div>
-                    <div id="todaycount" class="text-success">+2 this week</div>
-                </div>
-                <div class="col-12 col-sm bg-white rounded-4 p-4">
-                    <div class="align d-flex justify-content-between">
-                        <h4 class="fw-bold">Out of stock</h4>
-                        <i class="fa-solid fa-arrow-trend-down fs-2 text-danger"></i>
-                    </div>
-                    <div id="totalrevenue" class="fs-2">4</div>
-                    <div id="todaycount" class="text-success">+2 this week</div>
-                </div>
 
-            </div>
-    
+     
 
+      <!-- Stats -->
+      <div class="row gap-3 mb-4">
+        <div class="col-12 col-md statbox rounded-4 p-4 bg-white">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="stat-title">Total products</span>
+            <span class="stat-icon"><i class="fa-solid fa-box fs-2 text-primary"></i></span>
+          </div>
+          <div class="stat-number">20</div>
+          <div class="text-success fw-semibold">+2 this week</div>
+        </div>
+        <div class="col-12 col-md statbox rounded-4 p-4 bg-white">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="stat-title">Available</span>
+            <span class="stat-icon"><i class="fa-solid fa-arrow-trend-up fs-2 text-success"></i></span>
+          </div>
+          <div class="stat-number">18</div>
+          <div class="text-success fw-semibold">+1 this week</div>
+        </div>
+        <div class="col-12 col-md statbox rounded-4 p-4 bg-white">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="stat-title">Low Stock</span>
+            <span class="stat-icon"><i class="fa-solid fa-boxes-stacked fs-2 text-warning"></i></span>
+          </div>
+          <div class="stat-number">2</div>
+          <div class="text-success fw-semibold">+1 this week</div>
+        </div>
+        <div class="col-12 col-md statbox rounded-4 p-4 bg-white">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <span class="stat-title">Out of stock</span>
+            <span class="stat-icon"><i class="fa-solid fa-arrow-trend-down fs-2 text-danger"></i></span>
+          </div>
+          <div class="stat-number">4</div>
+          <div class="text-success fw-semibold">+1 this week</div>
+        </div>
+      </div>
+
+       <!-- Title -->
+      <h2 class="dashboard-title mb-2">Products</h2>
+      <div class="mb-3 text-muted" style="font-size:1.03em;">Manage your agricultural products and inventory</div>
+
+      <!-- Filter/search -->
+      <div class="d-flex align-items-center mb-3 flex-wrap gap-3">
+        <input type="search" class="form-control" style="max-width:290px;" placeholder="Search products by name or ID...">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Vegetables</button>
+        <button class="filter-btn">Fruits</button>
+        <button class="filter-btn">Grains</button>
+        <button class="filter-btn">Organic</button>
+        <div class="ms-auto">
+          <button class="btn btn-warning text-white fw-bold" style="border-radius:0.4em;"><a href="Farmerdashboardhome.html" style="text-decoration: none; color: white;"><i class="fa-solid fa-plus me-1"></i>Add New Product</a></button>
+        </div>
+      </div>
+
+      <!-- Products Table -->
+      <div class="table-responsive shadow-sm rounded-3">
+        <table class="table product-table align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Current Stock</th>
+              <th>Unit Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PRD-001</td>
+              <td>
+                <img src="" alt="" width="32" class="me-2 align-middle">
+                <span class="fw-bold text-dark">Organic Tomatoes</span><br>
+                <span class="text-muted" style="font-size:.94em;">SKU: TOM-ORG-01</span>
+              </td>
+              <td><span class="badge badge bg-light text-success">Vegetables</span></td>
+              <td>245 kg</td>
+              <td>₹12.50</td>
+              <td><span class="badge badge-available">Available</span></td>
+              <td class="table-actions">
+                <button class="btn" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>PRD-002</td>
+              <td>
+                <img src="product-carrot.png" alt="" width="32" class="me-2 align-middle">
+                <span class="fw-bold text-dark">Fresh Carrots</span><br>
+                <span class="text-muted" style="font-size:.94em;">SKU: CAR-FRE-02</span>
+              </td>
+              <td><span class="badge badge bg-light text-success">Vegetables</span></td>
+              <td>180 kg</td>
+              <td>₹8.80</td>
+              <td><span class="badge badge-available">Available</span></td>
+              <td class="table-actions">
+                <button class="btn" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>PRD-003</td>
+              <td>
+                <img src="product-apple.png" alt="" width="32" class="me-2 align-middle">
+                <span class="fw-bold text-dark">Red Apples</span><br>
+                <span class="text-muted" style="font-size:.94em;">SKU: APP-RED-03</span>
+              </td>
+              <td><span class="badge badge bg-light text-success">Fruits</span></td>
+              <td>45 kg</td>
+              <td>₹15.20</td>
+              <td><span class="badge badge-available">Available</span></td>
+              <td class="table-actions">
+                <button class="btn" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>PRD-004</td>
+              <td>
+                <img src="product-wheat.png" alt="" width="32" class="me-2 align-middle">
+                <span class="fw-bold text-dark">Wheat Grain</span><br>
+                <span class="text-muted" style="font-size:.94em;">SKU: WHE-GRA-04</span>
+              </td>
+              <td><span class="badge badge bg-light text-success">Grains</span></td>
+              <td>520 kg</td>
+              <td>₹6.50</td>
+              <td><span class="badge badge-available">Available</span></td>
+              <td class="table-actions">
+                <button class="btn" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>PRD-005</td>
+              <td>
+                <img src="product-lettuce.png" alt="" width="32" class="me-2 align-middle">
+                <span class="fw-bold text-dark">Organic Lettuce</span><br>
+                <span class="text-muted" style="font-size:.94em;">SKU: LET-ORG-05</span>
+              </td>
+              <td><span class="badge badge bg-light text-success">Vegetables</span></td>
+              <td class="text-danger fw-bold">0 kg</td>
+              <td>₹9.90</td>
+              <td><span class="badge badge-outstock">Out of Stock</span></td>
+              <td class="table-actions">
+                <button class="btn" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>PRD-006</td>
+              <td>
+                <img src="product-orange.png" alt="" width="32" class="me-2 align-middle">
+                <span class="fw-bold text-dark">Sweet Oranges</span><br>
+                <span class="text-muted" style="font-size:.94em;">SKU: ORG-SWE-06</span>
+              </td>
+              <td><span class="badge badge bg-light text-success">Fruits</span></td>
+              <td>310 kg</td>
+              <td>₹11.50</td>
+              <td><span class="badge badge-available">Available</span></td>
+              <td class="table-actions">
+                <button class="btn" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>PRD-007</td>
+              <td>
+                <img src="product-potato.png" alt="" width="32" class="me-2 align-middle">
+                <span class="fw-bold text-dark">Potatoes</span><br>
+                <span class="text-muted" style="font-size:.94em;">SKU: POT-REF-07</span>
+              </td>
+              <td><span class="badge badge bg-light text-success">Vegetables</span></td>
+              <td class="text-warning fw-bold">62 kg</td>
+              <td>₹5.80</td>
+              <td><span class="badge badge-available">Available</span></td>
+              <td class="table-actions">
+                <button class="btn" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>PRD-008</td>
+              <td>
+                <img src="product-corn.png" alt="" width="32" class="me-2 align-middle">
+                <span class="fw-bold text-dark">Sweet Corn</span><br>
+                <span class="text-muted" style="font-size:.94em;">SKU: COR-SWE-08</span>
+              </td>
+              <td><span class="badge badge bg-light text-success">Grains</span></td>
+              <td class="text-danger fw-bold">0 kg</td>
+              <td>₹7.20</td>
+              <td><span class="badge badge-outstock">Out of Stock</span></td>
+              <td class="table-actions">
+                <button class="btn" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button class="btn" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Pagination -->
+      <nav class="mt-3 d-flex justify-content-end">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">‹</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">›</a></li>
+        </ul>
+      </nav>
+      <div class="text-muted mt-1">Showing 1 to 8 of 24 products</div>
     </div>
   </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="Script/loadnavbar.js"></script>
 </body>
 </html>
