@@ -12,7 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body data-page="Home">
+<body data-page="">
     <div id="sidebar-placeholder"></div>
 
     <div class="main-content">
@@ -134,7 +134,7 @@
         // -------------------fetch name and details and showing-------------------
         let farmerdetails = [{
             name: "krishGOD",
-            pcount: 25,
+            pcount: 26,
             outcount: 4,
             orderactive: 12,
             total: 2000
@@ -166,8 +166,9 @@
         let quantity=document.getElementById("quantityinstock")
         let image=document.getElementById("imageInput")
         function addproduct(event){
-            event.preventDefault()
-        
+            
+            // if(!pname) console.log(pname);
+            console.log(pname);
         }
         buttonaddproduct.addEventListener("click",addproduct)
     </script>

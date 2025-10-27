@@ -38,35 +38,19 @@
     }
 
 
-     /*-------------- Responsive */
-    @media (max-width: 768px) {
-        .sidebar {
-            width: 100%;
-            height: auto;
-            position: relative;
+      /*-------------- Responsive */
+      @media (max-width: 768px) {
+        .layout {
+          flex-direction: column;
         }
 
-        .main-content {
-            margin-left: 0;
+        .sidebar {
+          width: 100%;
+          flex: 0 0 auto;
+          height: auto;
         }
 
         .topbar {
-            /* position: relative; */
-            display: none;
+          position: relative;
         }
-    }
-      .image-upload-box {
-        border: 2px dashed #aaa;
-        cursor: pointer;
-        transition: border-color 0.3s;
-    }
-
-    .image-upload-box:hover {
-        border-color: #6c63ff;
-    }
-
-    .image-upload-box img {
-        max-width: 50%;
-        max-height: 50%;
-        object-fit: cover;
-    }
+      }
