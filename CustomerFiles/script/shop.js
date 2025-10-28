@@ -3,18 +3,19 @@ let arrofdetails = JSON.parse(localStorage.getItem("productDetails")) || [];
 console.log(arrofdetails);
 
 arrofdetails.map((items) => {
+  const imgsrc = items.image ? items.image : "https://via.placeholder.com/32x32?text=No+Img";
   let resul = document.createElement("div");
   let count = 0;
   resul.className =
     "col px-2";
   insert.appendChild(resul);
-  resul.innerHTML = ` <div class="card border-0 border-top border-start border-5 border-success rounded-4 col  p-3">
+  resul.innerHTML = ` <div class="card border-0  border-5 border-success rounded-4 col  p-4">
                         <div class="row g-0 gap-3 align-items-end">
-                            <div class="col-3 d-flex align-items-center">
-                                <img src="category-thumb-8.jpg" class="img-fluid rounded-4" alt="...">
+                            <div class="col-3 d-flex ">
+                                <img src="${imgsrc}" class="img-fluid rounded-4" alt="...">
                             </div>
                             <div class="col ">
-                                <h5 class="card-title ">${items.name}</h5>
+                                <h5 class="card-title fw-bold fs-2">${items.name}</h5>
                                 <p class="card-text fs-3">₹${items.price}</p>
                             </div>
                         </div>
@@ -22,16 +23,17 @@ arrofdetails.map((items) => {
                             <p class="card-text">${items.description}</p>
                             <p>Available quantity:${items.quantity} </p>
                             <div class="row gap-3 mt-2 align-items-center">
-                            <label for="" class="col">Quantity(kg)</label>
+                            <label for="" class="col-7">Quantity(kg)</label>
 
-                                <button class="btn col btn-danger decrement">-</button>
+                                <button class="btn col-1 btn-outline-danger decrement">-</button>
                                 <div class="btn col border border-2 quantitycheck">${count}</div>
-                                <button class="btn col btn-success increment">+</button>
+                                <button class="btn col-1 btn-outline-success increment">+</button>
 
                             </div>
                                 <div class="row gap-3 mt-2">
-                                    <button class="btn btn-success col">Buy Now</button>
-                                <button class="btn btn-warning col">Add to Cart</button>
+                                    <button class="btn btn-outline-success col">Buy Now</button>
+                                <button class="btn btn-outline-warning col">Add to Cart</button>
+                                <button class="btn btn-outline-danger col-2"><i class="fa-regular fa-heart"></i></button>
                                 </div>
                         </div>
                         </div>

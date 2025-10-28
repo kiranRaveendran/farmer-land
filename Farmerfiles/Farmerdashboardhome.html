@@ -146,8 +146,6 @@
         }]
         farmerdetails.forEach((item) => {
             document.querySelectorAll(".namefarmer").forEach((div) => div.textContent = item.name)
-            document.getElementById("productcount").textContent = item.pcount
-            document.getElementById("outofstockcount").textContent = item.outcount
             document.getElementById("activeordercount").textContent = item.orderactive
             document.getElementById("totalrevenue").textContent = item.total
         })
