@@ -7,21 +7,23 @@ async function loadHTML(url, placeholderId) {
 
 //------------------- Load sidebar and topbar
 async function loadLayout() {
-  await loadHTML('sidebarcustomer.html', 'sidebar-placeholder');
-  await loadHTML('topbarcustomer.html', 'topbar-placeholder');
+  await loadHTML("sidebarcustomer.html", "sidebar-placeholder");
+  await loadHTML("topbarcustomer.html", "topbar-placeholder");
 
-//----------------- Highlight active page
-const currentPage = document.body.getAttribute('data-page');
-        if (currentPage) {
-            const sidebarButtons = document.querySelectorAll('#sidebarMenu button');
-            sidebarButtons.forEach((btn) => {
-                if (btn.textContent === currentPage) {
-                    btn.classList.add('bg-success');
-                    document.getElementById('currentpagename').textContent = btn.textContent;
-                }
-            });
-        }
-
+  //----------------- Highlight active page
+  const currentPage = document.body.getAttribute("data-page");
+  if (currentPage) {
+    const sidebarButtons = document.querySelectorAll("#sidebarMenu [data-page]");
+    sidebarButtons.forEach((btn) => {
+      if (btn.getAttribute('data-page') === currentPage) {
+        btn.classList.add('bg-white', 'text-dark');
+        btn.classList.remove('text-white');
+      } else {
+        btn.classList.remove('bg-success', 'text-light');
+        btn.classList.add('text-white');
+      }
+    });
+  }
+}
 //-------------------- Load everything
-window.addEventListener('DOMContentLoaded', loadLayout);
-
+window.addEventListener("DOMContentLoaded", loadLayout);

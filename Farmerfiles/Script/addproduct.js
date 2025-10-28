@@ -160,6 +160,14 @@ if (buttonaddproduct) {
   image.addEventListener("blur", checkimage);
   image.addEventListener("change", previewImage);
 }
+// show total products listed in main page
+document.getElementById("productcount").textContent=arrofdetails.length
+// show outofstock products
+let stockout=0
+arrofdetails.map((products)=>{
+  if(products.quantity==0) stockout++
+   document.getElementById("outofstockcount").textContent = stockout
+})
 
 // Uncomment for testing (to clear products storage)
 // localStorage.removeItem("productDetails");
