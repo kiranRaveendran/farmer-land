@@ -6,7 +6,7 @@
     body {
         margin: 0;
         font-family: "Poppins", sans-serif;
-        background-color: rgb(29, 97, 29);
+        /* background-color: rgb(29, 97, 29); */
 
     }
 
@@ -23,7 +23,7 @@
     }
 
     .main-content {
-        background-color: rgb(227, 249, 214);
+         background-color: rgb(249, 245, 239);
         margin-left: var(--sidebar-width);
     }
 
@@ -31,6 +31,9 @@
         background-color: white !important;
         font-size: larger;
         color: black !important;
+    }
+    #topbar-placeholder{
+         box-shadow: rgba(0, 0, 0, 0.25) 2.4px 2.4px 3.2px;
     }
 
     /*-------------- Responsive */
@@ -45,3 +48,6 @@
             margin-left: 0;
         }
     }
+
+    /* card in js file while adding product */
+    
