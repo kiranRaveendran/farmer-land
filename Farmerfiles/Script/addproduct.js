@@ -70,6 +70,7 @@ function addproduct(event) {
     });
     localStorage.setItem("productDetails", JSON.stringify(arrofdetails));
     console.log(arrofdetails);
+    
   }
 }
 arrofdetails.map((items) => {
