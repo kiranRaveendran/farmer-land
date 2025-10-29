@@ -8,8 +8,8 @@ async function loadHTML(url, placeholderId) {
 
 //------------------- Load sidebar and topbar
 async function loadLayout() {
-  await loadHTML('sidebar.html', 'sidebar-placeholder');
-  await loadHTML('topbar.html', 'topbar-placeholder');
+  await loadHTML('sidebaradmin.html', 'sidebar-placeholder');
+  await loadHTML('topbaradmin.html', 'topbar-placeholder');
 
   // Highlight active page
   const currentPage = document.body.getAttribute('data-page');
