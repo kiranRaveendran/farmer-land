@@ -1,0 +1,53 @@
+ :root {
+        --sidebar-width: 13rem;
+        --topbar-height: 5rem;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        /* background-color: rgb(29, 97, 29); */
+
+    }
+
+    .sidebar {
+        height: 100vh;
+        width: var(--sidebar-width);
+        position: fixed;
+        background-color: rgb(29, 97, 29);
+    }
+
+    .welcome {
+        background-color: rgb(29, 97, 29);
+
+    }
+
+    .main-content {
+         background-color: rgb(249, 245, 239);
+        margin-left: var(--sidebar-width);
+    }
+
+    .btndashboard:hover {
+        background-color: white !important;
+        font-size: larger;
+        color: black !important;
+    }
+    #topbar-placeholder{
+         box-shadow: rgba(0, 0, 0, 0.25) 2.4px 2.4px 3.2px;
+    }
+
+    /*-------------- Responsive */
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+
+        .main-content {
+            margin-left: 0;
+        }
+    }
+
+    /* card in js file while adding product */
+    
