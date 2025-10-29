@@ -1,11 +1,13 @@
 let insert = document.getElementById("insertitems");
 let arrofdetails = JSON.parse(localStorage.getItem("productDetails")) || [];
 console.log(arrofdetails);
+let buyitems=JSON.parse(localStorage.getItem("myorders"))||[];
 
-arrofdetails.map((items) => {
+
+arrofdetails.map((items,index) => {
   const imgsrc = items.image ? items.image : "https://via.placeholder.com/32x32?text=No+Img";
   let resul = document.createElement("div");
-  let count = 0;
+  let count = 1;
   resul.className =
     "col px-2";
   insert.appendChild(resul);
@@ -23,16 +25,16 @@ arrofdetails.map((items) => {
                             <p class="card-text">${items.description}</p>
                             <p>Available quantity:${items.quantity} </p>
                             <div class="row gap-3 mt-2 align-items-center">
-                            <label for="" class="col-7">Quantity(kg)</label>
+                            <label for="" class="col-6">Quantity(kg)</label>
 
                                 <button class="btn col-1 btn-outline-danger decrement">-</button>
-                                <div class="btn col border border-2 quantitycheck">${count}</div>
+                                <div class="btn col-2 border border-2 quantitycheck">${count}</div>
                                 <button class="btn col-1 btn-outline-success increment">+</button>
 
                             </div>
                                 <div class="row gap-3 mt-2">
-                                    <button class="btn btn-outline-success col">Buy Now</button>
-                                <button class="btn btn-outline-warning col">Add to Cart</button>
+                                    <button class="btn btn-outline-success col buybtn">Buy Now</button>
+                                <button class="btn btn-outline-warning col btnaddcart">Add to Cart</button>
                                 <button class="btn btn-outline-danger col-2"><i class="fa-regular fa-heart"></i></button>
                                 </div>
                         </div>
@@ -41,9 +43,26 @@ arrofdetails.map((items) => {
   let btndecrement = resul.querySelector(".decrement");
   let btnincrement = resul.querySelector(".increment");
   let disp = resul.querySelector(".quantitycheck");
+  let buynow=resul.querySelector(".buybtn")
+  
+  function additemstorder(){
+    buyitems.push({
+      orderid:`000${buyitems.length+1}`,
+      customername:"",
+      name:items.name,
+      price:items.price,
+      quantity:count,
+      totalprice:(items.price)*count
+    })
+    localStorage.setItem("myorders", JSON.stringify(buyitems));
+    console.log(buyitems);
+    
+  }
+  buynow.addEventListener("click",additemstorder)
+
 
   btndecrement.addEventListener("click", () => {
-    if (count > 0) count--;
+    if (count > 1) count--;
     disp.textContent = count;
   });
   btnincrement.addEventListener("click", () => {
@@ -51,3 +70,4 @@ arrofdetails.map((items) => {
     disp.textContent = count;
   });
 });
+// localStorage.removeItem("myorders");
