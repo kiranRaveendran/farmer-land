@@ -1,0 +1,101 @@
+/*-------------- Responsive */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    height: auto;
+  }
+
+  .topbar {
+    position: relative;
+  }
+}
+.image-upload-box {
+  border: 2px dashed #aaa;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.image-upload-box:hover {
+  border-color: #6c63ff;
+}
+
+.image-upload-box img {
+  max-width: 50%;
+  max-height: 50%;
+  object-fit: cover;
+}
+.submit {
+  background-color: rgb(29, 97, 29);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 5px 20px;
+}
+.submit:hover {
+  background-color: rgb(25, 80, 25);
+}
+#filterButton:hover {
+  background-color: rgb(25, 80, 25);
+}
+.welcome {
+  background-color: rgb(29, 97, 29);
+}
+
+.profilephoto {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.badge-delivered {
+  background: #d4f3df;
+  color: #276a3c !important;
+  border-radius: 0.4rem;
+}
+.badge-processing {
+  background: #fff6c4;
+  color: #866800 !important;
+  border-radius: 0.4rem;
+}
+.badge-shipped {
+  background: #e2eafc;
+  color: #2550a2 !important;
+  border-radius: 0.4rem;
+}
+.badge-cancelled {
+  background: #ffd9d9;
+  color: #a22f2f !;
+  border-radius: 0.4rem;
+}
+/* General Table Styling */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th {
+  font-weight: 600;
+  vertical-align: middle;
+  /* background-color: #e6f4ea; */
+  background-color: rgb(29, 97, 29);
+  color: white;
+}
+
+.table td {
+  vertical-align: middle;
+  padding: 12px 10px;
+}
+
+/* Profile Section */
+.profilephoto {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* border: 2px solid #28a745; */
+}
