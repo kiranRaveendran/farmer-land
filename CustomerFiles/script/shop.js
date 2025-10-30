@@ -52,7 +52,8 @@ arrofdetails.map((items,index) => {
       name:items.name,
       price:items.price,
       quantity:count,
-      totalprice:(items.price)*count
+      totalprice:`₹${(items.price)*count}.00`,
+      statusoforder:`Ordered`
     })
     localStorage.setItem("myorders", JSON.stringify(buyitems));
     console.log(buyitems);
