@@ -203,13 +203,23 @@
         }
       }
 
+      let admindtails={
+        email:"admin@gmail.com",
+        password:"Admin@123"
+      }
+
       // SUBMIT BUTTON ACTION
       submitButton.addEventListener("click", (e) => {
         e.preventDefault();
         havemail();
         havepassword();
 
-        if (havemail && havepassword) {
+        if(mail.value=== admindtails.email && password.value === admindtails.password){
+          window.location.href="Adminfiles/Admindashboardhome.html"
+          return;
+        }
+
+        else if (havemail && havepassword) {
           userType = customer.classList.contains("active")
             ? "Customer"
             : "Farmer";
