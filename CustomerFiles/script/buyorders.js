@@ -35,7 +35,6 @@ let result=latestdata.map((item)=>{
   
     let time=insert.querySelector(".time")
     console.log(time);
-    
     let delay=null
     let second=60
     let minute=5

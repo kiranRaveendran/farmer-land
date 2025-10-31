@@ -1,9 +1,5 @@
 
-      let cartItems = [
-      { image: "images/product-thumb-9.png", name: "Wheat", price: 50, quantity: 2 },
-      { image: "images/product-thumb-10.png", name: "Rice", price: 60, quantity: 1 },
-      { image: "images/category-thumb-7.jpg", name: "Egg", price: 10, quantity: 5 }
-    ];
+      let cartItems = JSON.parse(localStorage.getItem("cart"))||[]
 
       const cartBody = document.getElementById("cart-body");
       cartBody.innerHTML = "";
@@ -21,15 +17,19 @@
                    class="form-control text-center quantity"
                    style="width:80px;margin:auto;">
           </td>
-           <td>${(item.price)*(item.quantity)}</td>
+           <td >${(item.price)*(item.quantity)}</td>
           <td><span class="remove-btn">Remove</span></td> `;
 
            row.querySelector(".remove-btn").addEventListener("click", function() {
             row.remove()
+            localStorage.removeItem("cart")
+            
         cartItems.splice(index, 1); 
 
       });
       let inputs=row.querySelector(".quantity");
+      console.log(inputs.value);
+      
 
   // inputs.forEach(input => {
     // inputs.addEventListener("input", () => {
