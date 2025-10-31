@@ -8,7 +8,6 @@ let result=latestdata.map((item)=>{
      insert.innerHTML = `
           <tr>
             <td>${item.orderid}</td>
-            <td>${item.customername}</td>
             <td>${item.name}</td>
             <td>${item.quantity}</td>
             <td>${item.totalprice}</td>
