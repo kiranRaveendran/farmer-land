@@ -8,7 +8,7 @@ let delt=setInterval(()=>{
     if(btnn){
         btnn.addEventListener("click",(e)=>{
             e.preventDefault()
-            localStorage.removeItem("currentuser")
+            localStorage.removeItem("currentUser")
             window.location.href="../loginForm.html"
         })
         
