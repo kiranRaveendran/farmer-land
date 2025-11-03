@@ -1,24 +1,4 @@
 let latestdata=JSON.parse(localStorage.getItem("myorders"))||[]
-<<<<<<< HEAD
-console.log(latestdata);
-
-let result=latestdata.map((item)=>{
-    let insert=document.getElementById("orders-table-body")
-     insert.innerHTML += `
-          <tr>
-            <td>${item.orderid}</td>
-            <td>${item.customername}</td>
-            <td>${item.name}</td>
-            <td>${item.quantity}</td>
-            <td>${item.totalprice}</td>
-            <td></td>
-            <td>
-              <button class="btn btn-outline-danger p-2">Cancel order</button>
-            </td>
-          </tr>
-        `;
-})
-=======
 let insertappend=document.getElementById("orders-table-body")
 console.log(latestdata);
 
@@ -96,5 +76,4 @@ localStorage.setItem("myorders", JSON.stringify(latestdata));
 }
 reload()
 console.log(latestdata);
->>>>>>> 63e8313ae85b67a10fe76a80a2e72d46a77b937e
 
