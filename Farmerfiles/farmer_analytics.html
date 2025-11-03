@@ -85,7 +85,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="Script/loadnavbar.js"></script>
   <script>
-    // Example: using same category definitions as in products page
+    // Product category definitions
     const PRODUCT_CATEGORIES = [
       { value: "1", name: "Grains" },
       { value: "2", name: "Vegetables" },
@@ -106,50 +106,53 @@
       { value: "17", name: "Timber" },
     ];
 
-    // Get stored data
     let productDetails = JSON.parse(localStorage.getItem("productDetails")) || [];
-    let orderDetails = JSON.parse(localStorage.getItem("orderDetails")) || []; // You can replace with your source
+    let myorders = JSON.parse(localStorage.getItem("myorders")) || [];
     let paymentDetails = JSON.parse(localStorage.getItem("paymentDetails")) || [];
 
-    // Update KPI Cards
-    // Total Revenue: sum amounts in paymentDetails, fallback to products if empty
+    // Total Revenue: from payments (or fallback to product sum)
     let totalRevenue = paymentDetails.length
       ? paymentDetails.reduce((sum,p) => sum + parseFloat(p.amount.replace(/[^0-9\.]/g,'')),0)
       : productDetails.reduce((sum,p) => sum + (parseFloat(p.price)||0), 0);
 
     document.getElementById("totalRevenue").textContent = `$${totalRevenue.toLocaleString(undefined,{maximumFractionDigits:2})}`;
 
-    // Total Orders
-    document.getElementById("totalOrders").textContent = orderDetails.length || 0;
+    // Total orders purchased
+    document.getElementById("totalOrders").textContent = myorders.length;
 
-    // Active Products: products in stock (>0)
-    let activeProductsCount = productDetails.filter(p => parseInt(p.quantity,10)>0).length;
+    // Active products: products in stock > 0
+    let activeProductsCount = productDetails.filter(p => parseInt(p.quantity,10) > 0).length;
     document.getElementById("activeProducts").textContent = activeProductsCount;
 
-    // Delivery Success: percent of delivered from orderDetails
-    let delivered = orderDetails.filter(o => (o.status||"").toLowerCase() === "delivered").length;
-    let deliveryPct = orderDetails.length ? Math.round((delivered/orderDetails.length)*1000)/10 : 0;
+    // Delivery Success (from myorders)
+    let delivered = myorders.filter(o => (o.statusoforder||"").toLowerCase() === "delivered").length;
+    let deliveryPct = myorders.length ? Math.round((delivered/myorders.length)*1000)/10 : 0;
     document.getElementById("deliverySuccess").textContent = `${deliveryPct}%`;
 
-    // Top Selling Products: dummy by category count in products (replace with your sales logic)
-    let salesByCategory = {};
+    // --- TOP SELLING ITEMS LOGIC ---
+    // Build product name -> category value mapping
+    let productCategoryMap = {};
     productDetails.forEach(p => {
-      if (!salesByCategory[p.category]) salesByCategory[p.category] = 0;
-      salesByCategory[p.category] += parseInt(p.quantity,10)||0;
+      productCategoryMap[p.name] = p.category;
     });
-
-    // Take top 5 categories
-    let topCats = Object.entries(salesByCategory).map(([cat,qty]) => ({
-      catName: (PRODUCT_CATEGORIES.find(c=>c.value==cat)||{name:"Other"}).name,
+    // Count actual purchased item qty per category from orders
+    let purchasesByCategory = {};
+    myorders.forEach(order => {
+      let cat = productCategoryMap[order.name] || "Other";
+      if (!purchasesByCategory[cat]) purchasesByCategory[cat] = 0;
+      purchasesByCategory[cat] += Number(order.quantity) || 0;
+    });
+    // Display top N
+    let topCats = Object.entries(purchasesByCategory).map(([cat, qty]) => ({
+      catName: (PRODUCT_CATEGORIES.find(c => c.value == cat) || { name: "Other" }).name,
       qty
-    })).sort((a,b)=>b.qty-a.qty).slice(0,5);
+    })).sort((a, b) => b.qty - a.qty).slice(0, 5);
 
-    // Calculate percentages
-    let maxQty = topCats[0]? topCats[0].qty : 1;
+    let maxQty = topCats[0] ? topCats[0].qty : 1;
     let topSellingContainer = document.getElementById("topSellingContainer");
     topSellingContainer.innerHTML = "";
     if (topCats.length) {
-      topCats.forEach((row,i) => {
+      topCats.forEach((row, i) => {
         topSellingContainer.innerHTML += `
           <div class="mb-3">
             <div class="d-flex justify-content-between">
@@ -157,7 +160,7 @@
               <span>${row.qty}</span>
             </div>
             <div class="progress" style="height: 10px;">
-              <div class="progress-bar bg-success" style="width: ${(row.qty/maxQty)*100}%;"></div>
+              <div class="progress-bar bg-success" style="width: ${(row.qty / maxQty) * 100}%"></div>
             </div>
           </div>
         `;
@@ -166,7 +169,7 @@
       topSellingContainer.innerHTML = `<div class="text-muted">No sales data available</div>`;
     }
 
-    // Recent Payments Table
+    // --- Payments Table ---
     let paymentsList = paymentDetails.slice(-5).reverse();
     let paymentsBody = document.getElementById("recentPaymentsBody");
     paymentsBody.innerHTML = "";
@@ -185,8 +188,6 @@
       paymentsBody.innerHTML = `<tr><td colspan="4" class="text-center text-muted">No payments found</td></tr>`;
     }
   </script>
-    <script src="Script/logout.js"></script>
-    <script src="Script/logout.js"></script>
-
+  <script src="Script/logout.js"></script>
 </body>
 </html>
