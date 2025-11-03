@@ -32,8 +32,21 @@ function reload(){
         insertappend.appendChild(insert)
     let status=insert.querySelector(".status")
     if(status.textContent=="Ordered"){
+      status.classList.add("bg-warning","p-2","rounded-3","text-white")
+    }
+    if(status.textContent=="Processing"){
+      status.classList.add("bg-warning-subtle","p-2","rounded-3","text-white")
+    }
+    if(status.textContent=="Shipped"){
+      status.classList.add("bg-primary","p-2","rounded-3","text-white")
+    }
+    if(status.textContent=="Delivered"){
       status.classList.add("bg-success","p-2","rounded-3","text-white")
     }
+    if(status.textContent=="Cancelled"){
+      status.classList.add("bg-danger","p-2","rounded-3","text-white")
+    }
+    
     let cancelorder=insert.querySelector(".cancel")
     cancelorder.addEventListener("click",()=>{
       clearInterval(delay)
