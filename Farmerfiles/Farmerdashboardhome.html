@@ -35,7 +35,7 @@
                         <h4 class="fw-bold">Products Listed</h4>
                         <i class="fa-solid fa-box fs-2 me-2 text-primary"></i>
                     </div>
-                    <div id="productcount" class="fs-2">34</div>
+                    <div id="productcount" class="fs-2"></div>
                     <div id="todaycount" class="text-success">+2 this week</div>
                 </div>
                 <div class="col-12 col-sm bg-white rounded-4 p-4">
@@ -43,7 +43,7 @@
                         <h4 class="fw-bold">Out Of Stock</h4>
                         <i class="fa-solid fa-arrow-trend-up fs-2 text-danger"></i>
                     </div>
-                    <div id="outofstockcount" class="fs-2">34</div>
+                    <div id="outofstockcount" class="fs-2"></div>
                     <div id="todaycount" class="text-success">+2 this week</div>
                 </div>
                 <div class="col-12 col-md bg-white rounded-4 p-4">
@@ -51,7 +51,7 @@
                         <h4 class="fw-bold">Active Orders</h4>
                         <i class="fa-solid fa-boxes-stacked fs-2 text-success"></i>
                     </div>
-                    <div id="activeordercount" class="fs-2">34</div>
+                    <div id="activeordercount" class="fs-2"></div>
                     <div id="todaycount" class="text-success">+2 this week</div>
                 </div>
                 <div class="col-12 col-sm bg-white rounded-4 p-4">
@@ -59,7 +59,7 @@
                         <h4 class="fw-bold">Total revenue</h4>
                         <i class="fa-solid fa-tag fs-2 text-warning"></i>
                     </div>
-                    <div id="totalrevenue" class="fs-2">34</div>
+                    <div id="totalrevenue" class="fs-2">0</div>
                     <div id="todaycount" class="text-success">+2 this week</div>
                 </div>
 
@@ -161,16 +161,9 @@
             name.textContent = current.name
             console.log(current)
         }
-        let farmerdetails = [{
-            pcount: 26,
-            outcount: 4,
-            orderactive: 12,
-            total: 2000
-        }]
-        farmerdetails.forEach((item) => {
-            document.getElementById("activeordercount").textContent = item.orderactive
-            document.getElementById("totalrevenue").textContent = item.total
-        })
+        let update=JSON.parse(localStorage.getItem("myorders"))
+        document.getElementById("activeordercount").textContent = update.length
+
 
     </script>
     <script src="Script/logout.js"></script>
