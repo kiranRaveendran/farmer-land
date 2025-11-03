@@ -71,7 +71,7 @@ arrofdetails.map((items,index) => {
     
     addtocart.push({
       orderid:`000${buyitems.length+1}`,
-      customername:"",
+      customername:user.name,
       name:items.name,
       img:imgsrc,
       price:items.price,
