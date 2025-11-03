@@ -9,7 +9,7 @@ function reload(){
 
   insertappend.innerHTML = "";
   latestdata.forEach((item,index)=>{
-    const id=String(index + 1).padStart(3, "0")
+    const id=String(index + 1).padStart(1, "0")
     item.orderid=id
     
     let insert=document.createElement("tr")
