@@ -121,7 +121,7 @@
                   I agree to the Terms & Conditions
                 </label>
               </div>
-              
+
               <button
                 id="registerButton"
                 type="submit"
@@ -150,7 +150,7 @@
 
               <div class="text-center small-text">
                 Already have an account?
-                <a href="#" class="fw-semibold text-dark">Login here</a>
+                <a href="loginForm.html" class="fw-semibold text-dark">Login here</a>
               </div>
             </form>
           </div>
@@ -166,13 +166,15 @@
       const registerButton = document.getElementById("registerButton");
       const customer = document.getElementById("customer");
       const farmer = document.getElementById("farmer");
+      const terms = document.getElementById("terms");
+
 
       const box1 = document.getElementById("box1");
       const box2 = document.getElementById("box2");
       const box3 = document.getElementById("box3");
       const box4 = document.getElementById("box4");
       const swap = document.getElementById("swap");
-      let demoarray=JSON.parse(localStorage.getItem("isauser"))||[];
+      let demoarray = JSON.parse(localStorage.getItem("isauser")) || [];
 
       const namepattern = /^[A-Za-z\s]+$/;
       const mailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -185,8 +187,13 @@
         box1.classList.add("text-warning");
         if (finalname === "") {
           box1.textContent = "Name is required.";
+          return false;
         } else if (!namepattern.test(finalname)) {
           box1.textContent = "Name should contain only letters.";
+          return false;
+        } else {
+          box1.textContent = "";
+          return true;
         }
       }
 
@@ -196,8 +203,15 @@
         box2.classList.add("text-warning");
         if (finalmail === "") {
           box2.textContent = "Email is required.";
-        } else if (!mailpattern.test(finalmail)) {
+          return false;
+        }
+         else if (!mailpattern.test(finalmail)) {
           box2.textContent = "Enter a valid email address.";
+           return false;
+        }
+        else{
+          box2.textContent = "";
+          return true;
         }
       }
 
@@ -209,51 +223,83 @@
 
         if (realpassword === "") {
           box3.textContent = "Password is required😤.";
+          return false;
         } else if (realpassword.length < 8) {
           box3.textContent = "Password must be at least 8 characters long.";
+          return false;
         } else if (!/[A-Z]/.test(realpassword)) {
           box3.textContent = "Include at least one uppercase letter.";
+          return false;
         } else if (!/[a-z]/.test(realpassword)) {
           box3.textContent = "Include at least one lowercase letter.";
+          return false;
         } else if (!/[0-9]/.test(realpassword)) {
           box3.textContent = "Include at least one number.";
+          return false;
         } else if (!/[@$!%*?&]/.test(realpassword)) {
           box3.textContent = "Include at least one special character.";
+          return false;
         } else {
           box3.classList.replace("text-warning", "text-success");
           box3.textContent = "Password looks good!";
+          return true;
         }
       }
 
       function passwordComparison() {
-        box4.textContent = "";
-        box4.classList.add("text-success");
+       
+       
         box4.classList.remove("text-warning");
         if (confirmPassword.value.trim() !== password.value.trim()) {
           box4.textContent = "not matched with previous password";
+           box4.classList.add("text-warning");
+           return false;
         }
+        else{
+           box4.textContent = "";
+           return true;
+        }
+      }
+
+      function termsCheck() {
+        if (!terms.checked) {
+          alert("You must agree to the Terms & Conditions.");
+          return false;
+        }
+        return true;
       }
 
       registerButton.addEventListener("click", (e) => {
         e.preventDefault();
-        namecheck();
-        mailCheck();
-        passwordCheck();
-        passwordComparison();
 
-        if (namecheck && mailCheck && passwordCheck && passwordComparison) {
+        const isNameOk = namecheck();
+        const isEmailOk = mailCheck();
+        const isPasswordOk = passwordCheck();
+        const isConfirmOk = passwordComparison();
+        const isTermsOk = termsCheck();
+
+        if (isNameOk && isEmailOk && isPasswordOk && isConfirmOk && isTermsOk)  {
           const userType = customer.classList.contains("active")
             ? "Customer"
             : "Farmer";
-           demoarray.push({
+             
+            const enteredMail=mail.value.trim();
+            const userExist=demoarray.some((user)=>user.mail==enteredMail);
+            if(userExist){
+              alert("user already exist with same mail id");
+              return
+            }
+
+
+          demoarray.push({
             name: name.value.trim(),
-            mail: mail.value.trim(),
+            mail: enteredMail,
             password: password.value.trim(),
-            userType: userType
+            userType: userType,
           });
-          localStorage.setItem("isauser",JSON.stringify(demoarray));
+          localStorage.setItem("isauser", JSON.stringify(demoarray));
           console.log(demoarray);
-          
+
           alert(`${userType}, Registered Successfully`);
 
           name.value = "";
@@ -265,20 +311,19 @@
 
       customer.addEventListener("click", (e) => {
         e.preventDefault();
-        swap.textContent = "Customer login";
+        swap.textContent = "Customer Register";
 
         customer.classList.add("active");
         farmer.classList.remove("active");
       });
       farmer.addEventListener("click", (e) => {
         e.preventDefault();
-        swap.textContent = "Farmer login";
+        swap.textContent = "Farmer Register";
 
         farmer.classList.add("active");
         customer.classList.remove("active");
       });
       console.log(demoarray);
-      
     </script>
   </body>
 </html>
