@@ -2,6 +2,11 @@ let insert = document.getElementById("insertitems");
 let arrofdetails = JSON.parse(localStorage.getItem("productDetails")) || [];
 console.log(arrofdetails);
 let buyitems=JSON.parse(localStorage.getItem("myorders"))||[];
+<<<<<<< HEAD
+
+
+arrofdetails.map((items,index) => {
+=======
 let addtocart=JSON.parse(localStorage.getItem("cart"))||[]
 
 
@@ -9,6 +14,7 @@ arrofdetails.map((items,index) => {
   arrofdetails = JSON.parse(localStorage.getItem("productDetails")) || [];
   addtocart=JSON.parse(localStorage.getItem("cart"))||[]
   buyitems=JSON.parse(localStorage.getItem("myorders"))||[];
+>>>>>>> 63e8313ae85b67a10fe76a80a2e72d46a77b937e
   const imgsrc = items.image ? items.image : "https://via.placeholder.com/32x32?text=No+Img";
   let resul = document.createElement("div");
   let count = 1;
@@ -48,23 +54,35 @@ arrofdetails.map((items,index) => {
   let btnincrement = resul.querySelector(".increment");
   let disp = resul.querySelector(".quantitycheck");
   let buynow=resul.querySelector(".buybtn")
+<<<<<<< HEAD
+=======
   let cartadd=resul.querySelector(".btnaddcart")
+>>>>>>> 63e8313ae85b67a10fe76a80a2e72d46a77b937e
   
   function additemstorder(){
     buyitems.push({
       orderid:`000${buyitems.length+1}`,
       customername:"",
       name:items.name,
+<<<<<<< HEAD
+      price:items.price,
+      quantity:count,
+      totalprice:(items.price)*count
+=======
       img:imgsrc,
       price:items.price,
       quantity:count,
       totalprice:`₹${(items.price)*count}.00`,
       statusoforder:`Ordered`
+>>>>>>> 63e8313ae85b67a10fe76a80a2e72d46a77b937e
     })
     localStorage.setItem("myorders", JSON.stringify(buyitems));
     console.log(buyitems);
     
   }
+<<<<<<< HEAD
+  buynow.addEventListener("click",additemstorder)
+=======
   function addcart(){
     
     addtocart.push({
@@ -83,6 +101,7 @@ arrofdetails.map((items,index) => {
   }
   buynow.addEventListener("click",additemstorder)
   cartadd.addEventListener("click",addcart)
+>>>>>>> 63e8313ae85b67a10fe76a80a2e72d46a77b937e
 
 
   btndecrement.addEventListener("click", () => {
