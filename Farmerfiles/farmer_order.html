@@ -8,21 +8,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <link href="Style/navbar.css" rel="stylesheet">
   <style>
-    body {
-      background: #f7f8f9;
-    }
-    .btn-status-active {
-      background: #198754;
-      color: #fff !important;
-      border-radius: 0.4rem;
-      border: none;
-    }
-    .btn-status {
-      background: #fff;
-      color: #198754 !important;
-      border-radius: 0.4rem;
-      border: 1px solid #c3c8c3;
-    }
+    body { background: #f7f8f9; }
+    .btn-status-active { background: #198754; color: #fff !important; border-radius: 0.4rem; border: none; }
+    .btn-status { background: #fff; color: #198754 !important; border-radius: 0.4rem; border: 1px solid #c3c8c3; }
     .table thead th {
       color: #446c2f;
       font-weight: 600;
@@ -34,7 +22,6 @@
       padding-top:.9em;
       padding-bottom:.9em;
     }
-    /* Bigger font-size & alignment for tbody */
     .table tbody td {
       font-size: 1.09em;
       padding-top:1em;
@@ -73,6 +60,7 @@
       <!-- Status Filter Buttons -->
       <div class="d-flex gap-2 align-items-center mb-4 flex-wrap">
         <button class="btn btn-status-active" data-status="All">All Orders</button>
+        <button class="btn btn-status" data-status="Ordered">Ordered</button>
         <button class="btn btn-status" data-status="Processing">Processing</button>
         <button class="btn btn-status" data-status="Shipped">Shipped</button>
         <button class="btn btn-status" data-status="Delivered">Delivered</button>
@@ -116,125 +104,9 @@
       </div>
     </div>
   </div>
-  <script>
-    const orders = [
-      {
-        id: "#ORD-2024-001",
-        customer: "John Martinez",
-        details: "Organic Tomatoes, Fresh Lettuce",
-        quantity: "5 kg",
-        amount: "₹45.00",
-        status: "Delivered"
-      },
-      {
-        id: "#ORD-2024-002",
-        customer: "Sarah Johnson",
-        details: "Organic Carrots, Beetroot",
-        quantity: "3 kg",
-        amount: "₹32.50",
-        status: "Shipped"
-      },
-      {
-        id: "#ORD-2024-003",
-        customer: "Mitchell Chen",
-        details: "Fresh Corn, Green Beans, Peas",
-        quantity: "4 kg",
-        amount: "₹38.75",
-        status: "Processing"
-      },
-      {
-        id: "#ORD-2024-004",
-        customer: "Emily Rodriguez",
-        details: "Organic Potatoes, Onions",
-        quantity: "6 kg",
-        amount: "₹52.00",
-        status: "Delivered"
-      },
-      {
-        id: "#ORD-2024-005",
-        customer: "David Thompson",
-        details: "Mixed Salad Kit, Spinach",
-        quantity: "2 kg",
-        amount: "₹22.00",
-        status: "Cancelled"
-      },
-      {
-        id: "#ORD-2024-006",
-        customer: "Lisa Anderson",
-        details: "Organic Apples, Bananas",
-        quantity: "4 kg",
-        amount: "₹35.00",
-        status: "Shipped"
-      },
-      {
-        id: "#ORD-2024-007",
-        customer: "Michael Brown",
-        details: "Fresh Herbs, Basil",
-        quantity: "1 kg",
-        amount: "₹15.00",
-        status: "Processing"
-      },
-      {
-        id: "#ORD-2024-008",
-        customer: "Jennifer Wilson",
-        details: "Organic Broccoli, Cauliflower",
-        quantity: "3 kg",
-        amount: "₹42.00",
-        status: "Delivered"
-      }
-    ];
-
-    function getBadge(status) {
-      switch(status) {
-        case "Delivered": return '<span class="badge badge-delivered px-3 py-2">Delivered</span>';
-        case "Processing": return '<span class="badge badge-processing px-3 py-2">Processing</span>';
-        case "Shipped": return '<span class="badge badge-shipped px-3 py-2">Shipped</span>';
-        case "Cancelled": return '<span class="badge badge-cancelled px-3 py-2">Cancelled</span>';
-        default: return '';
-      }
-    }
-
-    function renderTable(filter) {
-      const tbody = document.getElementById('orders-table-body');
-      const countElement = document.getElementById('orders-count');
-      tbody.innerHTML = '';
-      let filtered = filter && filter !== "All"
-        ? orders.filter(order => order.status === filter)
-        : orders;
-      for (const order of filtered) {
-        tbody.innerHTML += `
-          <tr>
-            <td>${order.id}</td>
-            <td>${order.customer}</td>
-            <td>${order.details}</td>
-            <td>${order.quantity}</td>
-            <td>${order.amount}</td>
-            <td>${getBadge(order.status)}</td>
-            <td>
-              <button class="btn text-success p-0"><i class="fa-regular fa-eye"></i> View</button>
-            </td>
-          </tr>
-        `;
-      }
-      countElement.textContent = `Showing 1 to ${filtered.length} of ${filtered.length} orders`;
-    }
-
-    document.querySelectorAll('[data-status]').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.btn-status-active').forEach(b => {
-          b.classList.remove('btn-status-active');
-          b.classList.add('btn-status');
-        });
-        this.classList.remove('btn-status');
-        this.classList.add('btn-status-active');
-        renderTable(this.getAttribute('data-status'));
-      });
-    });
-
-    renderTable("All");
-  </script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="Script/loadnavbar.js"></script>
+  <script src="Script/farmerorder.js"></script>
+  <script src="Script/logout.js"></script>
 </body>
 </html>

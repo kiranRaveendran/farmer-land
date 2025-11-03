@@ -1,14 +1,23 @@
 let latestdata=JSON.parse(localStorage.getItem("myorders"))||[]
+let insertappend=document.getElementById("orders-table-body")
 console.log(latestdata);
 
-let result=latestdata.map((item)=>{
-    let insertappend=document.getElementById("orders-table-body")
+function reload(){
+  if (!Array.isArray(latestdata)) {
+    latestdata = [latestdata];
+  }
+
+  insertappend.innerHTML = "";
+  latestdata.forEach((item,index)=>{
+    const id=String(index + 1).padStart(1, "0")
+    item.orderid=id
+    
     let insert=document.createElement("tr")
-    insertappend.appendChild(insert)
+    
      insert.innerHTML = `
           <tr>
-            <td>${item.orderid}</td>
-            <td>${item.name}</td>
+            <td>00${item.orderid}</td>
+            <td><img src="${item.img}" alt="${item.name}" height="80">${item.name}</td>
             <td>${item.quantity}</td>
             <td>${item.totalprice}</td>
             <td ><span class="status">${item.statusoforder}</span></td>
@@ -20,6 +29,7 @@ let result=latestdata.map((item)=>{
             </td>
           </tr>
         `;
+        insertappend.appendChild(insert)
     let status=insert.querySelector(".status")
     if(status.textContent=="Ordered"){
       status.classList.add("bg-success","p-2","rounded-3","text-white")
@@ -27,15 +37,13 @@ let result=latestdata.map((item)=>{
     let cancelorder=insert.querySelector(".cancel")
     cancelorder.addEventListener("click",()=>{
       clearInterval(delay)
-      let getarray=JSON.parse(localStorage.getItem("myorders"))||[]
-      let resultt=getarray.filter((h)=>h.orderid!==item.orderid)
-      localStorage.setItem("myorders",JSON.stringify(resultt))
-      insert.remove()
+      latestdata.splice(index, 1);
+      localStorage.setItem("myorders", JSON.stringify(latestdata));
+      reload()
     })
   
     let time=insert.querySelector(".time")
     console.log(time);
-    
     let delay=null
     let second=60
     let minute=5
@@ -65,6 +73,8 @@ let result=latestdata.map((item)=>{
     }
     canceltime()
 })
-
+localStorage.setItem("myorders", JSON.stringify(latestdata));
+}
+reload()
 console.log(latestdata);
 

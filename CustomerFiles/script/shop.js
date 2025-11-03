@@ -2,9 +2,15 @@ let insert = document.getElementById("insertitems");
 let arrofdetails = JSON.parse(localStorage.getItem("productDetails")) || [];
 console.log(arrofdetails);
 let buyitems=JSON.parse(localStorage.getItem("myorders"))||[];
+let addtocart=JSON.parse(localStorage.getItem("cart"))||[]
+let username=JSON.parse(localStorage.getItem("currentUser"))
+let user=username[0]
 
 
 arrofdetails.map((items,index) => {
+  arrofdetails = JSON.parse(localStorage.getItem("productDetails")) || [];
+  addtocart=JSON.parse(localStorage.getItem("cart"))||[]
+  buyitems=JSON.parse(localStorage.getItem("myorders"))||[];
   const imgsrc = items.image ? items.image : "https://via.placeholder.com/32x32?text=No+Img";
   let resul = document.createElement("div");
   let count = 1;
@@ -44,12 +50,14 @@ arrofdetails.map((items,index) => {
   let btnincrement = resul.querySelector(".increment");
   let disp = resul.querySelector(".quantitycheck");
   let buynow=resul.querySelector(".buybtn")
+  let cartadd=resul.querySelector(".btnaddcart")
   
   function additemstorder(){
     buyitems.push({
-      orderid:`000${buyitems.length+1}`,
-      customername:"",
+      orderid:"",
+      customername:user.name,
       name:items.name,
+      img:imgsrc,
       price:items.price,
       quantity:count,
       totalprice:`₹${(items.price)*count}.00`,
@@ -59,7 +67,24 @@ arrofdetails.map((items,index) => {
     console.log(buyitems);
     
   }
+  function addcart(){
+    
+    addtocart.push({
+      orderid:`000${buyitems.length+1}`,
+      customername:user.name,
+      name:items.name,
+      img:imgsrc,
+      price:items.price,
+      quantity:count,
+      totalprice:`₹${(items.price)*count}.00`,
+      statusoforder:`Incart`
+    })
+     localStorage.setItem("cart", JSON.stringify(addtocart));
+    console.log(addtocart);
+
+  }
   buynow.addEventListener("click",additemstorder)
+  cartadd.addEventListener("click",addcart)
 
 
   btndecrement.addEventListener("click", () => {
