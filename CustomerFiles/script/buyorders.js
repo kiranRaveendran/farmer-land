@@ -9,13 +9,14 @@ function reload(){
 
   insertappend.innerHTML = "";
   latestdata.forEach((item,index)=>{
-    const orderid = String(index + 1).padStart(3, "0");
+    const id=String(index + 1).padStart(1, "0")
+    item.orderid=id
     
     let insert=document.createElement("tr")
     
      insert.innerHTML = `
           <tr>
-            <td>00${orderid}</td>
+            <td>00${item.orderid}</td>
             <td><img src="${item.img}" alt="${item.name}" height="80">${item.name}</td>
             <td>${item.quantity}</td>
             <td>${item.totalprice}</td>

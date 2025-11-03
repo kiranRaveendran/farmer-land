@@ -3,6 +3,8 @@ let arrofdetails = JSON.parse(localStorage.getItem("productDetails")) || [];
 console.log(arrofdetails);
 let buyitems=JSON.parse(localStorage.getItem("myorders"))||[];
 let addtocart=JSON.parse(localStorage.getItem("cart"))||[]
+let username=JSON.parse(localStorage.getItem("currentUser"))
+let user=username[0]
 
 
 arrofdetails.map((items,index) => {
@@ -52,8 +54,8 @@ arrofdetails.map((items,index) => {
   
   function additemstorder(){
     buyitems.push({
-      orderid:`000${buyitems.length+1}`,
-      customername:"",
+      orderid:"",
+      customername:user.name,
       name:items.name,
       img:imgsrc,
       price:items.price,

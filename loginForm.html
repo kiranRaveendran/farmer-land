@@ -95,19 +95,8 @@
                 <div id="box2"></div>
               </div>
               <div class="row mb-3">
-                <div class="col-6">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="remember"
-                    />
-                    <label class="form-check-label small-text" for="remember"
-                      >Remember me</label
-                    >
-                  </div>
-                </div>
-                <div class="col-6 text-end">
+                
+                <div class="col text-end">
                   <a
                     href="#"
                     class="small-text text-warning text-decoration-none"
@@ -143,7 +132,9 @@
 
               <div class="text-center small-text">
                 New user?
-                <a href="registerForm.html" class="fw-semibold text-dark">Register here</a>
+                <a href="registerForm.html" class="fw-semibold text-dark"
+                  >Register here</a
+                >
               </div>
             </form>
           </div>
@@ -202,24 +193,27 @@
           box2.textContent = "Password looks good!";
         }
       }
+      let admindtails = {
+        email: "admin@gmail.com",
+        password: "Admin@123",
+      };
 
-      let admindtails={
-        email:"admin@gmail.com",
-        password:"Admin@123"
-      }
+      
 
       // SUBMIT BUTTON ACTION
       submitButton.addEventListener("click", (e) => {
         e.preventDefault();
         havemail();
         havepassword();
+        
 
-        if(mail.value=== admindtails.email && password.value === admindtails.password){
-          window.location.href="Adminfiles/Admindashboardhome.html"
+        if (
+          mail.value === admindtails.email &&
+          password.value === admindtails.password
+        ) {
+          window.location.href = "Adminfiles/Admindashboardhome.html";
           return;
-        }
-
-        else if (havemail && havepassword) {
+        } else if (havemail && havepassword) {
           userType = customer.classList.contains("active")
             ? "Customer"
             : "Farmer";
@@ -236,20 +230,22 @@
               user.userType === userType
           );
 
+         
+
           // IF ALREADY A USER
           if (foundUser) {
             alert(`${userType}, login Successfully`);
-            const currentUserArray=[];
+            const currentUserArray = [];
             currentUserArray.push(foundUser);
-            localStorage.setItem("currentUser",JSON.stringify(currentUserArray));
-            if(userType=="Customer"){
+            localStorage.setItem(
+              "currentUser",
+              JSON.stringify(currentUserArray)
+            );
+            if (userType == "Customer") {
               window.location.href = "CustomerFiles/Customerdashboardhome.html";
+            } else {
+              window.location.href = "Farmerfiles/Farmerdashboardhome.html";
             }
-
-            else{
-               window.location.href = "Farmerfiles/Farmerdashboardhome.html";
-            }
-            
           } else {
             alert("Profile not found. Please register first.");
             console.log("No matching user found.");
