@@ -52,7 +52,7 @@ arrofdetails.map((items,index) => {
   
   function additemstorder(){
     buyitems.push({
-      orderid:`000${buyitems.length+1}`,
+      orderid:"",
       customername:"",
       name:items.name,
       img:imgsrc,
