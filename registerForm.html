@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Register</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: linear-gradient(135deg, #cfd8d7, #8fa49e);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .register-card {
+        max-width: 420px;
+        width: 100%;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+      }
+      .nav-tabs {
+        border-bottom: none;
+        justify-content: center;
+      }
+      .nav-tabs .nav-link {
+        border: none;
+        color: #777;
+        font-weight: 500;
+      }
+      .nav-tabs .nav-link.active {
+        border-bottom: 2px solid #c2a33a;
+        color: #000;
+      }
+      .register-btn {
+        background-color: #2f4f4f;
+        color: white;
+        font-weight: 500;
+      }
+      .register-btn:hover {
+        background-color: #254747;
+      }
+      .social-icons img {
+        width: 36px;
+        height: 36px;
+        margin: 0 8px;
+        cursor: pointer;
+      }
+      .small-text {
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+          <div class="register-card">
+            <!-- Tabs -->
+            <ul class="nav nav-tabs mb-3">
+              <li class="nav-item">
+                <a id="customer" class="nav-link active" href="#">Customer</a>
+              </li>
+              <li class="nav-item">
+                <a id="farmer" class="nav-link" href="#">Farmer</a>
+              </li>
+            </ul>
+
+            <!-- Register Form -->
+            <h5 id="swap" class="mb-3 fw-semibold">Customer Register</h5>
+            <form>
+              <div class="mb-3">
+                <label class="form-label small-text">FULL NAME</label>
+                <input
+                  id="name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter your full name"
+                />
+                <div id="box1"></div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small-text">EMAIL ADDRESS</label>
+                <input
+                  id="mail"
+                  type="email"
+                  class="form-control"
+                  placeholder="Enter your email"
+                />
+                <div id="box2"></div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small-text">PASSWORD</label>
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control"
+                  placeholder="Create a password"
+                />
+                <div id="box3"></div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small-text">CONFIRM PASSWORD</label>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  class="form-control"
+                  placeholder="Confirm your password"
+                />
+                <div id="box4"></div>
+              </div>
+
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="terms" />
+                <label class="form-check-label small-text" for="terms">
+                  I agree to the Terms & Conditions
+                </label>
+              </div>
+              
+              <button
+                id="registerButton"
+                type="submit"
+                class="btn w-100 register-btn mb-3"
+              >
+                REGISTER
+              </button>
+
+              <div class="text-center small-text text-muted mb-2">
+                OR REGISTER WITH
+              </div>
+              <div class="text-center social-icons mb-3">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg"
+                  alt="Facebook"
+                />
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                  alt="Google"
+                />
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+                  alt="Apple"
+                />
+              </div>
+
+              <div class="text-center small-text">
+                Already have an account?
+                <a href="loginForm.html" class="fw-semibold text-dark">Login here</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const name = document.getElementById("name");
+      const mail = document.getElementById("mail");
+      const password = document.getElementById("password");
+      const confirmPassword = document.getElementById("confirmPassword");
+      const registerButton = document.getElementById("registerButton");
+      const customer = document.getElementById("customer");
+      const farmer = document.getElementById("farmer");
+
+      const box1 = document.getElementById("box1");
+      const box2 = document.getElementById("box2");
+      const box3 = document.getElementById("box3");
+      const box4 = document.getElementById("box4");
+      const swap = document.getElementById("swap");
+      let demoarray=JSON.parse(localStorage.getItem("isauser"))||[];
+
+      const namepattern = /^[A-Za-z\s]+$/;
+      const mailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      let users = [];
+
+      function namecheck() {
+        const finalname = name.value.trim();
+        box1.textContent = "";
+        box1.classList.add("text-warning");
+        if (finalname === "") {
+          box1.textContent = "Name is required.";
+        } else if (!namepattern.test(finalname)) {
+          box1.textContent = "Name should contain only letters.";
+        }
+      }
+
+      function mailCheck() {
+        const finalmail = mail.value.trim();
+        box2.textContent = "";
+        box2.classList.add("text-warning");
+        if (finalmail === "") {
+          box2.textContent = "Email is required.";
+        } else if (!mailpattern.test(finalmail)) {
+          box2.textContent = "Enter a valid email address.";
+        }
+      }
+
+      function passwordCheck() {
+        const realpassword = password.value.trim();
+        box3.textContent = "";
+        box3.classList.remove("text-success");
+        box3.classList.add("text-warning");
+
+        if (realpassword === "") {
+          box3.textContent = "Password is required😤.";
+        } else if (realpassword.length < 8) {
+          box3.textContent = "Password must be at least 8 characters long.";
+        } else if (!/[A-Z]/.test(realpassword)) {
+          box3.textContent = "Include at least one uppercase letter.";
+        } else if (!/[a-z]/.test(realpassword)) {
+          box3.textContent = "Include at least one lowercase letter.";
+        } else if (!/[0-9]/.test(realpassword)) {
+          box3.textContent = "Include at least one number.";
+        } else if (!/[@$!%*?&]/.test(realpassword)) {
+          box3.textContent = "Include at least one special character.";
+        } else {
+          box3.classList.replace("text-warning", "text-success");
+          box3.textContent = "Password looks good!";
+        }
+      }
+
+      function passwordComparison() {
+        box4.textContent = "";
+        box4.classList.add("text-success");
+        box4.classList.remove("text-warning");
+        if (confirmPassword.value.trim() !== password.value.trim()) {
+          box4.textContent = "not matched with previous password";
+        }
+      }
+
+      registerButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        namecheck();
+        mailCheck();
+        passwordCheck();
+        passwordComparison();
+
+        if (namecheck && mailCheck && passwordCheck && passwordComparison) {
+          const userType = customer.classList.contains("active")
+            ? "Customer"
+            : "Farmer";
+           demoarray.push({
+            name: name.value.trim(),
+            mail: mail.value.trim(),
+            password: password.value.trim(),
+            userType: userType
+          });
+          localStorage.setItem("isauser",JSON.stringify(demoarray));
+          console.log(demoarray);
+          
+          alert(`${userType}, Registered Successfully`);
+
+          name.value = "";
+          mail.value = "";
+          password.value = "";
+          confirmPassword.value = "";
+        }
+      });
+
+      customer.addEventListener("click", (e) => {
+        e.preventDefault();
+        swap.textContent = "Customer login";
+
+        customer.classList.add("active");
+        farmer.classList.remove("active");
+      });
+      farmer.addEventListener("click", (e) => {
+        e.preventDefault();
+        swap.textContent = "Farmer login";
+
+        farmer.classList.add("active");
+        customer.classList.remove("active");
+      });
+      console.log(demoarray);
+      
+    </script>
+  </body>
+</html>

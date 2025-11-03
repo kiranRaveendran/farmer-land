@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CustomerDashboardtemplate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style/stylecustomer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+         <style>
+     th, td {
+      /* padding: 15px;  */
+      text-align: center;
+    }
+
+    td img {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+    }
+
+
+    .remove-btn {
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-summary {
+      margin-top: 30px;
+      text-align: right;
+      padding: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .cart-summary h4 {
+      margin-bottom: 10px;
+    }
+
+    .checkout-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+      background-color: #388e3c;
+    }
+   </style>
+</head>
+
+<body data-page="Cart">
+    <!-- sidebar -->
+    <div id="sidebar-placeholder"></div>
+
+    <div class="main-content">
+        <!------------------------ topbar----------------------------- -->
+        <div id="topbar-placeholder" class="p-3"></div>
+        <div class="content-body p-4">
+            <!-- Your all content goes here content goes here -->
+             <div class=" container-fluid rounded-4 p-5 bg-white">
+        <h3 class="mb-4 text-success text-center"> <span><i class="fa-solid fa-cart-shopping"></i></span>My Cart</h3>
+        <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Product Name</th>
+                    <th>Price($)</th>
+                    <th>Quantity</th>
+                    <th>Subtotal($)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cart-body">
+               
+            </tbody>
+        </table> 
+        </div>
+        <div class="cart-summary">
+            <h4>Subtotal:₹ <span id="subtotal"></span></h4>
+            <P>Delivery Charge:₹50</P>
+            <h5><strong>Total:₹ <span id="maintotal"></span></strong></h5>
+            <button class="checkout-btn" id="Checkout">Proceed to Checkout</button>
+        </div>
+
+    </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Script/scriptcustomer.js"></script>
+    <script src="script/cartcustomer.js"></script>
+    <script src="script/nameadding.js"></script>
+    <script src="script/checkout.js"></script>
+</body>
+</html>

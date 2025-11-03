@@ -168,6 +168,8 @@ arrofdetails.map((products)=>{
   if(products.quantity==0) stockout++
    document.getElementById("outofstockcount").textContent = stockout
 })
+console.log(arrofdetails);
+
 
 // Uncomment for testing (to clear products storage)
 // localStorage.removeItem("productDetails");

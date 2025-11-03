@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +11,7 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body data-page="home">
     <div id="sidebar-placeholder"></div>
 
@@ -21,7 +23,7 @@
             <!-- Your all content goes here content goes here -->
             <div class="welcome d-flex justify-content-between p-5 rounded-4 ">
                 <div class="toaligncontent text-white">
-                    <h2>Welcome back <span class="namefarmer">Demo</span></h2>
+                    <h2>Welcome <span id="namecustomer">Please Login</span></h2>
                     <p>Your Farm is Looking Great.Check your Latest Orders and Mange below</p>
                 </div>
                 <i class="fa-solid text-warning fa-leaf display-1 pe-2"></i>
@@ -101,14 +103,15 @@
 
                 <div class="col-sm-6">
                     <label for="price" class="form-label">Price Per unit</label>
-                    <input type="number" min="0" class="form-control" id="price" placeholder="Price" aria-label="First name">
+                    <input type="number" min="0" class="form-control" id="price" placeholder="Price"
+                        aria-label="First name">
                     <div id="invalidprice" class="text-danger fw-normal"></div>
                 </div>
                 <div class="col-sm-6">
                     <label for="quantityinstock" class="form-label">Quantity in Stock (kg)</label>
-                    <input type="number" min="0" class="form-control" id="quantityinstock" placeholder="Quantity Available"
-                        aria-label="Last name">
-                        <div id="invalidquantity" class="text-danger fw-normal"></div>
+                    <input type="number" min="0" class="form-control" id="quantityinstock"
+                        placeholder="Quantity Available" aria-label="Last name">
+                    <div id="invalidquantity" class="text-danger fw-normal"></div>
                 </div>
                 <div class="col-12">
                     <label for="" class="form-label">Product Image</label>
@@ -119,7 +122,7 @@
                         <img id="preview" style="display:none;" />
                         <input id="imageInput" class="d-none" type="file" accept="image/*"
                             onchange="previewImage(event)">
-                            <div class="imageinvalid" class="text-danger fw-normal"></div>
+                        <div class="imageinvalid" class="text-danger fw-normal"></div>
                     </div>
                 </div>
                 <div class="col gap-4 d-flex flex-column flex-sm-row">
@@ -135,6 +138,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="Script/loadnavbar.js"></script>
     <script src="Script/addproduct.js"></script>
+
     <script>
         // -----------image in form
         function previewImage(event) {
@@ -150,20 +154,27 @@
             reader.readAsDataURL(event.target.files[0]);
         }
         // -------------------fetch name and details and showing-------------------
+        let liveuser = JSON.parse(localStorage.getItem("currentUser")) || [];
+        let current = liveuser[0]
+        let name = document.getElementById("namecustomer")
+        if (name) {
+            name.textContent = current.name
+            console.log(current)
+        }
         let farmerdetails = [{
-            name: "krishGOD",
             pcount: 26,
             outcount: 4,
             orderactive: 12,
             total: 2000
         }]
         farmerdetails.forEach((item) => {
-            document.querySelectorAll(".namefarmer").forEach((div) => div.textContent = item.name)
             document.getElementById("activeordercount").textContent = item.orderactive
             document.getElementById("totalrevenue").textContent = item.total
         })
-        
+
     </script>
+    <script src="Script/logout.js"></script>
+
 </body>
 
 
