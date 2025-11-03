@@ -1,5 +1,3 @@
-// Script/addproduct.js
-
 let buttonaddproduct = document.getElementById("btnaddproduct");
 let pname = document.getElementById("Productname");
 let category = document.getElementById("Category");
@@ -65,14 +63,10 @@ function checkquantity() {
     return true;
   }
 }
+// image is OPTIONAL; always return true
 function checkimage() {
-  if (!image.value) {
-    imageinvalid.textContent = "Please upload a product image";
-    return false;
-  } else {
-    imageinvalid.textContent = "";
-    return true;
-  }
+  imageinvalid.textContent = "";
+  return true;
 }
 
 // Main addproduct handler
@@ -84,7 +78,7 @@ function addproduct(event) {
   let validDesc = checkdescription();
   let validPrice = checkprice();
   let validQty = checkquantity();
-  let validImg = checkimage();
+  let validImg = checkimage(); // always true
 
   if (!validName) {
     pname.focus(); return;
@@ -96,11 +90,9 @@ function addproduct(event) {
     priceperunit.focus(); return;
   } else if (!validQty) {
     quantity.focus(); return;
-  } else if (!validImg) {
-    image.focus(); return;
   }
 
-  // Save product including image preview (base64)
+  // If image is selected, save preview; else, just save empty string
   if (image.files && image.files[0]) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -110,7 +102,7 @@ function addproduct(event) {
         description: description.value,
         price: priceperunit.value,
         quantity: quantity.value,
-        image: e.target.result
+        image: e.target.result // base64 string
       });
       localStorage.setItem("productDetails", JSON.stringify(arrofdetails));
       alert("Product added successfully!");
@@ -118,6 +110,8 @@ function addproduct(event) {
       document.getElementById("preview").style.display = "none";
       document.getElementById("uploadText").style.display = "";
       document.getElementById("uploadicon").style.display = "";
+      // update productcount/outofstock below if needed
+      updateCounts();
     };
     reader.readAsDataURL(image.files[0]);
   } else {
@@ -127,7 +121,7 @@ function addproduct(event) {
       description: description.value,
       price: priceperunit.value,
       quantity: quantity.value,
-      image: ""
+      image: "" // No image
     });
     localStorage.setItem("productDetails", JSON.stringify(arrofdetails));
     alert("Product added successfully!");
@@ -135,19 +129,23 @@ function addproduct(event) {
     document.getElementById("preview").style.display = "none";
     document.getElementById("uploadText").style.display = "";
     document.getElementById("uploadicon").style.display = "";
+    updateCounts();
   }
 }
 
+// Preview if an image is chosen; otherwise, do nothing
 function previewImage(event) {
-  const reader = new FileReader();
-  reader.onload = function () {
-    const preview = document.getElementById('preview');
-    preview.src = reader.result;
-    preview.style.display = 'block';
-    document.getElementById('uploadText').style.display = 'none';
-    document.getElementById('uploadicon').style.display = 'none';
-  };
-  reader.readAsDataURL(event.target.files[0]);
+  if (event.target.files && event.target.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      const preview = document.getElementById('preview');
+      preview.src = reader.result;
+      preview.style.display = 'block';
+      document.getElementById('uploadText').style.display = 'none';
+      document.getElementById('uploadicon').style.display = 'none';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
 }
 
 if (buttonaddproduct) {
@@ -160,16 +158,23 @@ if (buttonaddproduct) {
   image.addEventListener("blur", checkimage);
   image.addEventListener("change", previewImage);
 }
-// show total products listed in main page
-document.getElementById("productcount").textContent=arrofdetails.length
-// show outofstock products
-let stockout=0
-arrofdetails.map((products)=>{
-  if(products.quantity==0) stockout++
-   document.getElementById("outofstockcount").textContent = stockout
-})
+
+// Update product statistics in dashboard (adjust as per your HTML)
+function updateCounts() {
+  let arrofdetails = JSON.parse(localStorage.getItem("productDetails")) || [];
+  document.getElementById("productcount").textContent = arrofdetails.length;
+  // show outofstock products
+  let stockout = 0;
+  arrofdetails.forEach((products) => {
+    if (Number(products.quantity) === 0) stockout++;
+  });
+  if(document.getElementById("outofstockcount")) {
+    document.getElementById("outofstockcount").textContent = stockout;
+  }
+}
+
+// On page load, update the dashboard numbers
+updateCounts();
+
 console.log(arrofdetails);
-
-
-// Uncomment for testing (to clear products storage)
 // localStorage.removeItem("productDetails");
